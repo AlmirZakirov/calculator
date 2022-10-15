@@ -6,7 +6,7 @@
 
 ---
 
-######[YouTube канал](https://www.youtube.com/channel/UCkwr7q984xnJvL0m_nKnT5A/featured)
+###### [YouTube канал](https://www.youtube.com/channel/UCkwr7q984xnJvL0m_nKnT5A/featured)
 
 > Только повторял за автором по JS с готовой версткой!!!
 
