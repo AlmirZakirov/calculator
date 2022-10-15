@@ -57,7 +57,7 @@ const formatCurrency = n =>
 
 	calcLabelExpenses.style.display = 'none';
 
-	formAusn.addEventListener('input', debounceTimer(() => {
+	const handlerForm = () => {
 
 		const income = +formAusn.income.value;
 
@@ -74,9 +74,13 @@ const formatCurrency = n =>
 			const profit = income < expenses ? 0 : income - expenses;
 			resultTaxTotal.textContent = formatCurrency(profit * 0.2);
 		}
+	}
 
+	formAusn.addEventListener('reset', () => {
+		setTimeout(handlerForm);
+	});
+	formAusn.addEventListener('input', debounceTimer(handlerForm, 300));
 
-	}, 500))
 }
 
 // Самосзанятий и ИП НПД
