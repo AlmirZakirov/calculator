@@ -50,19 +50,26 @@ export class CalcComponent {
 
     if (!isNaN(Number(key)) && key.length === 1) {
       this.onNumberClick(key); // Добавляем цифру в сервис
-    } else if (key === 'Backspace') {
-      this.onDeleteClick(); // Удаляем последний символ
-    } else if (key === 'Escape') {
-      // Используем 'Escape' для кнопки сброса
-      this.onClearClick(); // Очищаем весь ввод
-    } else if (key === '%') {
-      this.onPercentageClick();
-    } else if (key === ',') {
-      this.onCommaClick();
-    } else if (['+', '-', '*', '/'].includes(key)) {
-      this.onOperatorClick(key);
-    } else if (key === 'Enter' || key === '=') {
-      this.onEqualClick();
+    } else {
+
     }
+      if (key === 'Backspace') {
+      this.onDeleteClick(); // Удаляем последний символ
+    } else {
+        if (key === 'Escape') {
+          // Используем 'Escape' для кнопки сброса
+          this.onClearClick(); // Очищаем весь ввод
+        } else {
+          if (key === '%') {
+            this.onPercentageClick();
+          } else if (key === ',') {
+            this.onCommaClick();
+          } else if (['+', '-', '*', '/'].includes(key)) {
+            this.onOperatorClick(key);
+          } else if (key === 'Enter' || key === '=') {
+            this.onEqualClick();
+          }
+        }
+      }
   }
 }

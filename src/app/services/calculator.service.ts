@@ -1,18 +1,24 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {BehaviorSubject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CalculatorService {
+  /**
+   * 1) public поля
+   * 2) private поля
+   * 3) @Input/Output
+   *
+   * 4) конструктор
+   * 5) методы жизн цикла
+   * 6) публичные методы
+   * 7) приватные методы
+   * 8) статичных методов не должно быть в JS
+   */
   private currentInput: string = '';
   private currentInputSubject = new BehaviorSubject<string>('');
   currentInput$ = this.currentInputSubject.asObservable();
-
-  setCurrentInput(value: string): void {
-    const currentInput = this.currentInputSubject.getValue();
-    this.currentInputSubject.next(currentInput + value);
-  }
 
   private currentOperator: string | null = null; // Текущий оператор
   private firstOperand: number | null = null; // Первый операнд
@@ -25,6 +31,11 @@ export class CalculatorService {
   clearInput(): void {
     this.currentInput = ''; // Очищаем текущее значение
     this.currentInputSubject.next(this.currentInput); // Обновляем значение в потоке
+  }
+
+  setCurrentInput(value: string): void {
+    const currentInput = this.currentInputSubject.getValue();
+    this.currentInputSubject.next(currentInput + value);
   }
 
   // В сервисе добавляем метод для удаления последнего символа
@@ -70,65 +81,65 @@ export class CalculatorService {
   }
 
   setOperator(operator: string): void {
-	const currentInput = this.getCurrentInput();
-  
-	if (currentInput) {
-	  // Если уже есть предыдущий результат, обновляем первый операнд
-	  if (this.firstOperand === null) {
-		this.firstOperand = parseFloat(currentInput);
-		this.currentOperator = operator;
-		this.currentInputSubject.next(`${this.firstOperand} ${this.currentOperator}`); // Отображаем первую часть операции
-		this.currentInputSubject.next(`${this.firstOperand} ${operator}`);
+    const currentInput = this.getCurrentInput();
 
-	  } else {
-		// Выполняем вычисление с предыдущим оператором
-		this.calculateResult(); // Выполняем вычисление
-		this.currentOperator = operator; // Устанавливаем новый оператор
-		this.currentInputSubject.next(`${this.firstOperand} ${this.currentOperator}`); // Обновляем отображение
-		this.currentInputSubject.next(`${this.firstOperand} ${operator}`);
+    if (currentInput) {
+      // Если уже есть предыдущий результат, обновляем первый операнд
+      if (this.firstOperand === null) {
+        this.firstOperand = parseFloat(currentInput);
+        this.currentOperator = operator;
+        this.currentInputSubject.next(`${this.firstOperand} ${this.currentOperator}`); // Отображаем первую часть операции
+        this.currentInputSubject.next(`${this.firstOperand} ${operator}`);
 
-	  }
-	}
+      } else {
+        // Выполняем вычисление с предыдущим оператором
+        this.calculateResult(); // Выполняем вычисление
+        this.currentOperator = operator; // Устанавливаем новый оператор
+        this.currentInputSubject.next(`${this.firstOperand} ${this.currentOperator}`); // Обновляем отображение
+        this.currentInputSubject.next(`${this.firstOperand} ${operator}`);
+
+      }
+    }
   }
-  
+
 
   calculateResult(): void {
-	const currentInput = this.getCurrentInput();
-  
-	if (currentInput && this.firstOperand !== null && this.currentOperator) {
-	  this.secondOperand = parseFloat(currentInput);
-	  let result: number | null = null;
-  
-	  switch (this.currentOperator) {
-		case '+':
-		  result = this.firstOperand + this.secondOperand;
-		  break;
-		case '-':
-		  result = this.firstOperand - this.secondOperand;
-		  break;
-		case '*':
-		  result = this.firstOperand * this.secondOperand;
-		  break;
-		case '/':
-		  if (this.secondOperand !== 0) {
-			result = this.firstOperand / this.secondOperand;
-		  } else {
-			result = null; // Ошибка деления на 0
-		  }
-		  break;
-	  }
-  
-	  if (result !== null) {
-		const formattedResult = result % 1 === 0 ? result.toString() : result.toFixed(2);
-		this.currentInputSubject.next(`${this.firstOperand} ${this.currentOperator} ${this.secondOperand} = ${formattedResult}`);
-		// Обновляем первый операнд для возможных последующих вычислений
-		this.firstOperand = parseFloat(formattedResult);
-		this.currentOperator = null; // Сбрасываем текущий оператор
-		this.secondOperand = null; // Сбрасываем второй операнд
-	  } else {
-		this.currentInputSubject.next('Ошибка');
-	  }
-	}
+    const currentInput = this.getCurrentInput();
+
+    if (currentInput && this.firstOperand !== null && this.currentOperator) {
+      this.secondOperand = parseFloat(currentInput);
+      let result: number | null = null;
+
+      switch (this.currentOperator) {
+        case '+':
+          result = this.firstOperand + this.secondOperand;
+          break;
+        case '-':
+          result = this.firstOperand - this.secondOperand;
+          break;
+        case '*':
+          result = this.firstOperand * this.secondOperand;
+          break;
+        case '/':
+          if (this.secondOperand !== 0) {
+            result = this.firstOperand / this.secondOperand;
+          } else {
+            result = null; // Ошибка деления на 0
+          }
+          break;
+      }
+
+      if (result !== null) {
+        const formattedResult = result % 1 === 0 ? result.toString() : result.toFixed(2);
+        this.currentInputSubject.next(`${this.firstOperand} ${this.currentOperator} ${this.secondOperand} = ${formattedResult}`);
+        // Обновляем первый операнд для возможных последующих вычислений
+        this.firstOperand = parseFloat(formattedResult);
+        this.currentOperator = null; // Сбрасываем текущий оператор
+        this.secondOperand = null; // Сбрасываем второй операнд
+      } else {
+        this.currentInputSubject.next('Ошибка');
+      }
+    }
   }
-  
+
 }
