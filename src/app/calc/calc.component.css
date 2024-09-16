@@ -1,0 +1,63 @@
+/* Сетка кнопок */
+.calculator__buttons {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr)); /* 4 равные колонки */
+  gap: 3px; /* Отступы между кнопками */
+  justify-content: center;
+}
+
+/* Общие стили для всех кнопок */
+.calculator__buttons button {
+  width: 100%;
+  height: 50px;
+  padding: 20px;
+  background-color: #4b4b4b;
+  border: none;
+  color: var(--white-color);
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Стили для кнопок при наведении */
+.calculator__buttons button:hover {
+  background-color: #ccc;
+}
+
+.calculator__buttons button:nth-child(1):hover,  /* % */
+  .calculator__buttons button:nth-child(2):hover,  /* +/- */
+  .calculator__buttons button:nth-child(3):hover,  /* C */
+  .calculator__buttons button:nth-child(4):hover {
+  /* DEL */
+  background-color: #fb8c00;
+}
+
+/* Специальный стиль для кнопки "=" */
+.calculator__equal {
+  grid-column: 4; /* Кнопка занимает четвертую колонку */
+  background-color: #4caf50;
+  color: white;
+}
+
+.calculator__equal:hover {
+  background-color: #45a049;
+}
+
+/* Специальный стиль для кнопки "0" */
+.calculator__buttons button:nth-child(17) {
+  grid-column: 1; /* Кнопка "0" занимает первую колонку */
+  grid-row: 5; /* Кнопка "0" в пятом ряду */
+}
+
+/* Общие стили для операторов */
+.calculator__buttons button:nth-child(4n) {
+  background-color: #289400; /* Оранжевые кнопки для операций */
+  color: white;
+}
+
+.calculator__buttons button:nth-child(4n):hover {
+  background-color: #e65100;
+}

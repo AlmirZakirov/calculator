@@ -1,0 +1,28 @@
+<div class="calculator__buttons">
+  <button (click)="onPercentageClick()">%</button>
+  <button (click)="onToggleSignClick()">+/-</button>
+  <button (click)="onClearClick()">C</button>
+  <button (click)="onDeleteClick()">DEL</button>
+
+  <!-- Числа и операции -->
+  <button (click)="onNumberClick('7')">7</button>
+  <button (click)="onNumberClick('8')">8</button>
+  <button (click)="onNumberClick('9')">9</button>
+  <button (click)="onOperatorClick('/')">/</button>
+
+  <button (click)="onNumberClick('4')">4</button>
+  <button (click)="onNumberClick('5')">5</button>
+  <button (click)="onNumberClick('6')">6</button>
+  <button (click)="onOperatorClick('*')">*</button>
+
+  <button (click)="onNumberClick('1')">1</button>
+  <button (click)="onNumberClick('2')">2</button>
+  <button (click)="onNumberClick('3')">3</button>
+  <button (click)="onOperatorClick('-')">-</button>
+
+  <button (click)="onNumberClick('0')">0</button>
+  <button>,</button>
+  <button (click)="onOperatorClick('+')">+</button>
+
+  <button class="calculator__equal" (click)="onEqualClick()">=</button>
+</div>

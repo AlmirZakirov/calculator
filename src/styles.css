@@ -1,1 +1,37 @@
-/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+:root {
+  --white-color: #fff;
+  --darck-color: #2d2a37;
+  --gradient-color-btn: linear-gradient(180deg, #462975 0%, #4e317d 100%);
+}
+
+body {
+  background: linear-gradient(
+    90deg,
+    #09090a 0%,
+    #181719 37.5%,
+    #36343b 100%,
+    #39363d 100%
+  );
+  text-align: center;
+  color: var(--white-color);
+  font-family: "Roboto", sans-serif;
+}
+
+h1 {
+  color: var(--white-color);
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-weight: 800;
+  letter-spacing: 3px;
+}
+
+/* .calculator {
+  padding: 20px;
+  margin: 0 auto;
+  border-radius: 30px;
+  width: 350px;
+  height: 500px;
+  background: var(--darck-color);
+ 
+} */
